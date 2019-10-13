@@ -6,7 +6,7 @@
 /*   By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 17:46:35 by bstacksp          #+#    #+#             */
-/*   Updated: 2019/10/09 18:09:08 by bstacksp         ###   ########.fr       */
+/*   Updated: 2019/10/13 18:52:51 by bstacksp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define FILLIT_H
 # include "./libft/libft.h"
 
+typedef struct		s_flist
+{
+
+}					t_flist;
 
 
 #endif
