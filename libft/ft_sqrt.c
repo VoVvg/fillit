@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/26 19:02:35 by bstacksp          #+#    #+#             */
-/*   Updated: 2019/10/28 18:20:17 by bstacksp         ###   ########.fr       */
+/*   Created: 2019/10/26 16:46:10 by bstacksp          #+#    #+#             */
+/*   Updated: 2019/10/26 16:47:41 by bstacksp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-#include "./libft/libft.h"
-#include <fcntl.h>
-
-typedef struct	s_flist
+int	ft_sqrt(int nb)
 {
-	char		*temp;
-	int			field;
-	t_flist 	*next;
-}				t_flist;
+	int i;
 
-
-#endif
+	i = 2;
+	if (nb <= 0)
+		return (0);
+	while ((i * i) < nb)
+		i++;
+	return (i);
+}

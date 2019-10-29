@@ -6,15 +6,14 @@
 /*   By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:56:16 by bstacksp          #+#    #+#             */
-/*   Updated: 2019/10/25 21:13:20 by bstacksp         ###   ########.fr       */
+/*   Updated: 2019/10/27 17:32:52 by bstacksp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 21
 # define MAX_FD 256
-# define CHECKRETURN(a, b) if(a) return (b);
+# define CHECKRETURN(a, b) if (a) return (b);
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -97,5 +96,7 @@ int					ft_wordlen(char const *str, char c);
 void				ft_swapnfree(char **var, void *new_vol);
 size_t				ft_strsnlen(const char *str);
 int					get_next_line(const int fd, char **line);
+int					ft_sqrt(int nb);
+void				ft_strset(char *b, char sub, char fill);
 
 #endif

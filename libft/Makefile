@@ -6,7 +6,7 @@
 #    By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/05 19:49:00 by bstacksp          #+#    #+#              #
-#    Updated: 2019/10/09 18:06:57 by bstacksp         ###   ########.fr        #
+#    Updated: 2019/10/26 16:51:11 by bstacksp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS	= ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 		ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c ft_lstnew.c \
 		ft_lstmap.c ft_lstiter.c \
 		ft_numlen.c ft_wordlen.c ft_countwords.c ft_swapnfree.c ft_strsnlen.c \
-		get_next_line.c
+		get_next_line.c ft_sqrt.c ft_strset.c
 
 OBJ 	= ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \
 		ft_memchr.o ft_memcmp.o	ft_strlen.o ft_strdup.o ft_strcpy.o \
@@ -44,7 +44,7 @@ OBJ 	= ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \
 		ft_lstadd.o ft_lstdel.o ft_lstdelone.o ft_lstiter.o ft_lstnew.o \
 		ft_lstmap.o ft_lstiter.o \
 		ft_numlen.o ft_wordlen.o ft_countwords.o ft_swapnfree.o ft_strsnlen.o \
-		get_next_line.o
+		get_next_line.o ft_sqrt.o ft_strset.o
 
 
 

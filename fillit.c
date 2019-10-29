@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/26 19:02:35 by bstacksp          #+#    #+#             */
-/*   Updated: 2019/10/28 18:20:17 by bstacksp         ###   ########.fr       */
+/*   Created: 2019/10/26 19:04:52 by bstacksp          #+#    #+#             */
+/*   Updated: 2019/10/27 17:50:49 by bstacksp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "fillit.h"
 
-#include "./libft/libft.h"
-#include <fcntl.h>
-
-typedef struct	s_flist
+int		main(int argc, char **argv)
 {
-	char		*temp;
-	int			field;
-	t_flist 	*next;
-}				t_flist;
+	int		fd;
+	t_flist *list;
 
-
-#endif
+	if (argc != 2)
+	{
+		write(1, "usage: fillit input_file\n", 26);
+		return (0);
+	}
+	fd = open(argv[1], O_RDONLY);
+	list = read_file(fd);
+}

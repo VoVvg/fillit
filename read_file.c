@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/26 19:02:35 by bstacksp          #+#    #+#             */
-/*   Updated: 2019/10/28 18:20:17 by bstacksp         ###   ########.fr       */
+/*   Created: 2019/10/27 14:54:24 by bstacksp          #+#    #+#             */
+/*   Updated: 2019/10/29 14:46:14 by bstacksp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "fillit.h"
 
-#include "./libft/libft.h"
-#include <fcntl.h>
-
-typedef struct	s_flist
+t_flist		*read_file(int fd)
 {
-	char		*temp;
-	int			field;
-	t_flist 	*next;
-}				t_flist;
+	t_flist		*file;
+	t_flist		*head;
+	int			buf[22];
 
-
-#endif
+	while (read(fd, buf, 21) > 0)
+	{
+		buf[22] = '\0';
+		file = malloc(sizeof(t_flist));
+		file->next = NULL;
+		file->temp = ft_strdup(buf);
+		CHECKRETURN(!(valide(file->temp)), NULL);
+		read(fd, buf, 1);
+		if (buf[0] != '\n')
+			file = file->next;
+	}
+}
