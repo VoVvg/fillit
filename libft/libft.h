@@ -6,7 +6,7 @@
 /*   By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:56:16 by bstacksp          #+#    #+#             */
-/*   Updated: 2019/10/27 17:32:52 by bstacksp         ###   ########.fr       */
+/*   Updated: 2019/10/30 18:41:02 by bstacksp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # define MAX_FD 256
 # define CHECKRETURN(a, b) if (a) return (b);
+# define BUFF_SIZE 21
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
