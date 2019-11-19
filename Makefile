@@ -6,26 +6,49 @@
 #    By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/04 17:37:15 by bstacksp          #+#    #+#              #
-#    Updated: 2019/10/20 18:25:23 by bstacksp         ###   ########.fr        #
+#    Updated: 2019/11/19 17:25:02 by bstacksp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fillit
+LIBFT = libft
+LIBFT_PATH = libft/libft.a
+FILLIT = fillit
 
-HEADERS = fillit.h
+HEADERS = -I includes/
+FLAGS = -Wall -Wextra -Werror
 
-SOURCE = main.c
+SRC_FOLDER = src
+OBJ_FOLDER = obj
 
-OBJECTS = main.o
+SRC_NAMES = main.c ft_read_file.c tools.c
 
-all: $(NAME)
-	gcc -I $(HEADERS) -Wall -Werror -Wextra $< -c -o $(NAME)
+FILLIT_SRC = $(addprefix $(SRC_FOLDER)/, $(SRC_NAMES))
 
-clean: 
-	rm -f $(OBJECTS)
+OBJ = $(addprefix $(OBJ_FOLDER)/, $(SRC_NAMES:.c=.o))
 
-fclean: 
-	rm -f $(NAME)
+all: $(LIBFT_PATH) $(FILLIT)
 
-re:
-	fclean all
+$(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c
+	@mkdir -p $(OBJ_FOLDER)
+	@gcc $(FLAGS) $(HEADERS) -c $< -o $@
+	@echo "Obj -> done"
+
+$(LIBFT_PATH):
+	@make -C $(LIBFT)
+	@echo "Library -> done"
+
+$(FILLIT): $(OBJ)
+	@gcc $(OBJ) $(HEADERS) -L. $(LIBFT_PATH) -o $(FILLIT)
+	@echo "FILLIT compilator binary -> done"
+
+clean:
+	@make clean -C $(LIBFT)
+	@/bin/rm -rf $(OBJ_FOLDER)
+	@echo "Obj removed"
+
+fclean: clean
+	@make fclean -C $(LIBFT)
+	@/bin/rm -f $(FILLIT)
+	@echo "Binaries removed"
+
+re: fclean all
