@@ -6,7 +6,7 @@
 /*   By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 18:03:12 by sroland           #+#    #+#             */
-/*   Updated: 2019/11/26 20:40:40 by bstacksp         ###   ########.fr       */
+/*   Updated: 2019/12/01 19:29:14 by bstacksp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int			check_symbols(char *tetr)
 	count = 0;
 	while (++i <= 19)
 	{
-		if ((i + 1) % 5 == 0)
+		if (((i + 1) % 5) == 0)
 		{
 			if (tetr[i] != '\n')
-				return (-1);
+				return (0);
 		}
 		else if ((tetr[i] != '.') && (tetr[i] != '#'))
 			return (0);
@@ -33,18 +33,30 @@ int			check_symbols(char *tetr)
 		if (count > 4)
 			return (0);
 	}
-	return (count < 4 ? 0 : 1);
+	if (count < 4)
+		return (0);
+	return (1);
 }
 
-int			is_valid_tetr(char *tetr, t_tlist *t_l)
+int			init_int(int *a, int *b, int *c, int *d)
 {
-	int		x_min = 5;
-	int		x_max = 0;
-	int		y_min = 5;
-	int		y_max = 0;
+	*a = 5;
+	*b = 0;
+	*c = 5;
+	*d = 0;
+	return (0);
+}
+
+int			is_valid_tetr(char *tetr, t_t_list *t_l)
+{
+	int		x_min;
+	int		x_max;
+	int		y_min;
+	int		y_max;
 	int		i;
 
 	i = -1;
+	init_int(&x_min, &x_max, &y_min, &y_max);
 	while (++i < 20)
 		if (tetr[i] == '#')
 		{
@@ -54,7 +66,7 @@ int			is_valid_tetr(char *tetr, t_tlist *t_l)
 			y_max = ((i + 1) / 5 > y_max ? (i + 1) / 5 : y_max);
 		}
 	if (x_max - x_min + y_max - y_min > 3)
-		return (-1);
+		return (0);
 	t_l->x_m = x_min - 1;
 	t_l->y_m = y_min;
 	t_l->x = x_max - x_min + 1;
@@ -62,7 +74,7 @@ int			is_valid_tetr(char *tetr, t_tlist *t_l)
 	return (1);
 }
 
-int			write_tetr(char *tetr, t_tlist *t_l)
+int			write_tetr(char *tetr, t_t_list *t_l)
 {
 	int			i;
 	int			j;
@@ -78,5 +90,8 @@ int			write_tetr(char *tetr, t_tlist *t_l)
 		}
 		i++;
 	}
-	return (0);
+	if ((t_l->x == 3 && t_l->tetr[1][0] == '.' && t_l->tetr[1][1] == '.')
+	|| (t_l->y == 3 && t_l->tetr[0][1] == '.' && t_l->tetr[1][1] == '.'))
+		return (0);
+	return (1);
 }

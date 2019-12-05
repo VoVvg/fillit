@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bstacksp <bstacksp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 22:41:42 by sroland           #+#    #+#             */
-/*   Updated: 2019/11/26 20:40:37 by bstacksp         ###   ########.fr       */
+/*   Created: 2019/12/01 17:15:00 by bstacksp          #+#    #+#             */
+/*   Updated: 2019/12/01 19:29:14 by bstacksp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		insert(char **field, int x, int y, t_tlist *t_l)
+int				insert(char **field, int x, int y, t_t_list *t_l)
 {
 	int			i;
 	int			j;
@@ -25,10 +25,10 @@ int		insert(char **field, int x, int y, t_tlist *t_l)
 		{
 			if (t_l->tetr[i - x][j - y] == '#')
 			{
-				if (field[x][y] < t_l->letter)
+				if (field[i][j] < t_l->letter)
 					return (-1);
 				else
-					field[x][y] = t_l->letter;
+					field[i][j] = t_l->letter;
 			}
 			j++;
 		}
@@ -37,22 +37,19 @@ int		insert(char **field, int x, int y, t_tlist *t_l)
 	return (1);
 }
 
-int		solver(int size, char **field, t_tlist *t_l)
+int				clean_letter(int size, char **field, char letter)
 {
 	int			i;
 	int			j;
 
-	if (t_l == NULL)
-		return (1);
 	j = 0;
-	while (j < size - t_l->y)
+	while (j < size)
 	{
 		i = 0;
-		while (i < size - t_l->x)
+		while (i < size)
 		{
-			if ((insert(field, i, j, t_l) == 1) &&
-				solver(size, field, t_l->next) == 1)
-				return (1);
+			if (field[i][j] >= letter)
+				field[i][j] = 'a';
 			i++;
 		}
 		j++;
@@ -60,17 +57,43 @@ int		solver(int size, char **field, t_tlist *t_l)
 	return (0);
 }
 
-char	**field_init(int size)
+int				solver(int size, char **field, t_t_list *t_l)
+{
+	int			i;
+	int			j;
+
+	if (t_l == NULL)
+		return (1);
+	j = 0;
+	while (j <= size - t_l->y)
+	{
+		i = 0;
+		while (i <= size - t_l->x)
+		{
+			if ((insert(field, i, j, t_l) == 1) &&
+				solver(size, field, t_l->next) == 1)
+				return (1);
+			clean_letter(size, field, t_l->letter);
+			i++;
+		}
+		j++;
+	}
+	return (0);
+}
+
+char			**field_init(int size)
 {
 	int			i;
 	int			j;
 	char		**res;
 
-	res = (char **)malloc(sizeof(char *) * size);
+	if (!(res = (char **)malloc(sizeof(char *) * size)))
+		return (NULL);
 	i = 0;
 	while (i < size)
 	{
-		res[i] = (char *)malloc(sizeof(char) * 25);
+		if (!(res[i] = (char *)malloc(sizeof(char) * 25)))
+			return (NULL);
 		i++;
 	}
 	i = 0;
@@ -87,7 +110,7 @@ char	**field_init(int size)
 	return (res);
 }
 
-int		print_field(char **field, int size)
+int				print_field(char **field, int size)
 {
 	int			i;
 	int			j;
